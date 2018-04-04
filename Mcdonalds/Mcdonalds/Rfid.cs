@@ -139,8 +139,10 @@ namespace Mcdonalds {
         /// </summary>
         public void Close() {
             reading = false;
-            if (serial.IsOpen) {
-                serial.Close();
+            if(serial != null) {
+                if (serial.IsOpen) {
+                    serial.Close();
+                }
             }
         }
         #endregion

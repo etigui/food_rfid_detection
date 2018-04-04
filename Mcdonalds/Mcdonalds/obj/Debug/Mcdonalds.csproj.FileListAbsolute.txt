@@ -18,7 +18,6 @@ C:\Users\Etienne\Documents\GitHub\system_nomad_rfid\Mcdonalds\Mcdonalds\bin\Debu
 C:\Users\Etienne\Documents\GitHub\system_nomad_rfid\Mcdonalds\Mcdonalds\bin\Debug\MetroFramework.Design.dll
 C:\Users\Etienne\Documents\GitHub\system_nomad_rfid\Mcdonalds\Mcdonalds\bin\Debug\MetroFramework.dll
 C:\Users\Etienne\Documents\GitHub\system_nomad_rfid\Mcdonalds\Mcdonalds\bin\Debug\MetroFramework.Fonts.dll
-C:\Users\Etienne\Documents\GitHub\system_nomad_rfid\Mcdonalds\Mcdonalds\obj\Debug\Mcdonalds.csprojResolveAssemblyReference.cache
 C:\Users\Etienne\Documents\GitHub\system_nomad_rfid\Mcdonalds\Mcdonalds\obj\Debug\Mcdonalds.Form1.resources
 C:\Users\Etienne\Documents\GitHub\system_nomad_rfid\Mcdonalds\Mcdonalds\obj\Debug\Mcdonalds.Properties.Resources.resources
 C:\Users\Etienne\Documents\GitHub\system_nomad_rfid\Mcdonalds\Mcdonalds\obj\Debug\Mcdonalds.csproj.GenerateResource.Cache

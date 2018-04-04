@@ -9,8 +9,12 @@ using System.Windows.Forms;
 
 namespace Mcdonalds {
     class Database {
+        #region Vars
 
         private string connection_string = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "mcdonalds.db");
+        #endregion
+
+        #region Get data
 
         public void get_all_product() {
             // Open database (or create if doesn't exist)
@@ -26,10 +30,6 @@ namespace Mcdonalds {
                     Console.WriteLine(String.Format("{0,-10} | {1,-20} | {2,-30} | {3,-40} | {4,-50}", data.Id, data.Tag_id, data.Name, data.Quantity, data.Date));
                 }
             }
-        }
-
-        public void get_product_by_id() {
-
         }
 
         public List<string> get_all_items_name() {
@@ -64,6 +64,9 @@ namespace Mcdonalds {
             }
             return name;
         }
+        #endregion
+
+        #region Set data
 
         public void add_product(string tag_id, string name, int quatity) {
 
@@ -86,7 +89,9 @@ namespace Mcdonalds {
                 products.Insert(product);
             }
         }
+        #endregion
     }
+    #region Table class
 
     class TProduct {
         public int Id { get; set; }
@@ -95,5 +100,6 @@ namespace Mcdonalds {
         public int Quantity { get; set; }
         public DateTime Date { get; set; }
     }
+    #endregion
 
 }

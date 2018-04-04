@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -22,37 +23,19 @@ namespace Mcdonalds {
         private string last_name_selected = string.Empty;
         private static string com_port = "COM4";
         Database db = null;
+        Rfid rfid = null;
         #endregion
+
+        #region Init
 
         private void Form1_Load(object sender, EventArgs e) {
             this.Width = Screen.PrimaryScreen.WorkingArea.Width;
             this.Height = Screen.PrimaryScreen.WorkingArea.Height;
-
             db = new Database();
-
-            //db.add_product("75-4-92-116", "Salads", 50);
-            //db.add_product("232-151-241-55", "Nuggets", 100);
             db.get_all_product();
             Item_button_enable();
         }
-
-
-        private void Item_button_enable() {
-            List<string> names = db.get_all_items_name();
-            List<string> ctrl = new List<string> { "-", "+", "Validate", "Remove" };
-            foreach (Control cont in this.Controls) {
-                if (cont.HasChildren) {
-                    foreach (Control contChild in cont.Controls) {
-                        if (contChild.GetType() == typeof(MetroFramework.Controls.MetroButton)) {
-                            if (!names.Contains(contChild.Text) && !ctrl.Contains(contChild.Text)) {
-                                contChild.Enabled = false;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
+        #endregion
 
         #region Button items (add)
 
@@ -225,32 +208,23 @@ namespace Mcdonalds {
 
         #endregion
 
-        private void BT_validate_Click(object sender, EventArgs e) {
-
-            // Check if there is something to checkout
-            if (LB_items.Items.Count != 0) {
-                LB_items.BackColor = Color.Red;
-                LB_items.ForeColor = Color.White;
-                Pannel_update(false);
-                Rfid rfid = new Rfid(com_port);
-
-                rfid.Tag_detected += Tag_detected;
-
-                bool d = rfid.Open_read();
-                int i = 0;
-            }
-        }
+        #region Tag id validation
 
         private void Tag_detected(object sender, TagDetectedEventArgs e) {
-            string name = db.get_product_by_tag_id(e.Tag_id);
-            Console.WriteLine($"Tag ID: {e.Tag_id}, Name: {name}");
+            Console.WriteLine($"Tag ID: {e.Tag_id}");
+            new Thread(() => Validate_item_tag(e.Tag_id)).Start();
+        }
 
+        private void Validate_item_tag(string tag_id) {
             int index = 0;
             int quantity = 0;
             bool parse = false;
-            
+
+            // Get product name by tag id
+            string name = db.get_product_by_tag_id(tag_id);
+
             // Iter all items in the listbox
-            foreach (string d in LB_items.Items) {  
+            foreach (string d in LB_items.Items) {
                 if (d.Split(' ')[1] == name) {
                     parse = int.TryParse(d.Split(' ')[0].Replace("[", "").Replace("]", "").Replace("x", ""), out quantity);
                     break;
@@ -261,12 +235,98 @@ namespace Mcdonalds {
             // Check if the int was well parsed and if we find the item name
             if (parse) {
 
-                // Invoke Listbox cause ither thread
-                LB_items.Invoke((Action)delegate {
-                    LB_items.Items[index] = $"[{quantity -1 }x] {name}";
-                });
+                // When all items are validated => green backgroud
+                if (Check_all_validated()) {
+                    LB_items.BackColor = Color.Green;
+                    LB_items.ForeColor = Color.White;
+                }
+
+                // Check if extra item added
+                if (quantity != 0) {
+
+                    // Invoke Listbox cause ither thread
+                    LB_items.Invoke((Action)delegate {
+                        LB_items.Items[index] = $"[{quantity - 1 }x] {name}";
+                    });
+                } else {
+                    MessageBox.Show("You add an extra item !", "Item error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
+
+        private bool Check_all_validated() {
+            int quantity = 0;
+            int all = 0;
+            bool parse = false;
+
+            // Iter all items in the listbox
+            foreach (string d in LB_items.Items) {
+                parse = int.TryParse(d.Split(' ')[0].Replace("[", "").Replace("]", "").Replace("x", ""), out quantity);
+                all = all + quantity;
+            }
+
+            // Check if all items are at 0x
+            if ((all - 1) == 0) {
+                return true;
+            }
+            return false;
+        }
+
+        private void BT_validate_Click(object sender, EventArgs e) {
+
+            // Check if there is something to checkout
+            if (LB_items.Items.Count != 0) {
+                if (BT_validate.Text == "Validate") {
+                    BT_validate.Text = "New client";
+
+                    // Red color => not all validated
+                    LB_items.BackColor = Color.Red;
+                    LB_items.ForeColor = Color.White;
+                    Pannel_update(false);
+
+                    // Start detect tag id
+                    rfid = new Rfid(com_port);
+                    rfid.Tag_detected += Tag_detected;
+                    if (!rfid.Open_read()) {
+                        throw new ArgumentException("RFID fatal error");
+                    }
+                } else {
+
+                    // Check if server want to start a new client
+                    DialogResult dialogResult = MessageBox.Show("It might rest items. Wanna start new client ?", "New client", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes) {
+                        items.Clear();
+                        LB_items.Items.Clear();
+                        LB_items.BackColor = Color.White;
+                        LB_items.ForeColor = Color.Black;
+                        rfid.Tag_detected -= Tag_detected;
+                        rfid.Close();
+                        Pannel_update(true);
+                        Item_button_enable();
+                        BT_validate.Text = "Validate";
+                    }
+                }
+            }
+        }
+
+        private void Item_button_enable() {
+            List<string> names = db.get_all_items_name();
+            List<string> ctrl = new List<string> { "-", "+", "Validate", "Remove", "New client" };
+            foreach (Control cont in this.Controls) {
+                if (cont.HasChildren) {
+                    foreach (Control contChild in cont.Controls) {
+                        if (contChild.GetType() == typeof(MetroFramework.Controls.MetroButton)) {
+                            if (!names.Contains(contChild.Text) && !ctrl.Contains(contChild.Text)) {
+                                contChild.Enabled = false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region Control pannel
 
         private void Pannel_update(bool enable) {
             BT_add.Enabled = enable;
@@ -285,6 +345,7 @@ namespace Mcdonalds {
             BT_water.Enabled = enable;
             BT_wraps.Enabled = enable;
         }
+        #endregion
     }
     #region Item class
 
