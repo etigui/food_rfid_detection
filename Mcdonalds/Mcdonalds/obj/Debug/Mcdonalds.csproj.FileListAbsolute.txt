@@ -12,3 +12,16 @@ C:\Users\Admin\source\repos\Mcdonalds\Mcdonalds\obj\Debug\Mcdonalds.csproj.CopyC
 C:\Users\Admin\source\repos\Mcdonalds\Mcdonalds\obj\Debug\Mcdonalds.exe
 C:\Users\Admin\source\repos\Mcdonalds\Mcdonalds\obj\Debug\Mcdonalds.pdb
 C:\Users\Admin\source\repos\Mcdonalds\Mcdonalds\obj\Debug\Mcdonalds.csprojResolveAssemblyReference.cache
+C:\Users\Etienne\Documents\GitHub\system_nomad_rfid\Mcdonalds\Mcdonalds\bin\Debug\Mcdonalds.exe.config
+C:\Users\Etienne\Documents\GitHub\system_nomad_rfid\Mcdonalds\Mcdonalds\bin\Debug\Mcdonalds.exe
+C:\Users\Etienne\Documents\GitHub\system_nomad_rfid\Mcdonalds\Mcdonalds\bin\Debug\Mcdonalds.pdb
+C:\Users\Etienne\Documents\GitHub\system_nomad_rfid\Mcdonalds\Mcdonalds\bin\Debug\MetroFramework.Design.dll
+C:\Users\Etienne\Documents\GitHub\system_nomad_rfid\Mcdonalds\Mcdonalds\bin\Debug\MetroFramework.dll
+C:\Users\Etienne\Documents\GitHub\system_nomad_rfid\Mcdonalds\Mcdonalds\bin\Debug\MetroFramework.Fonts.dll
+C:\Users\Etienne\Documents\GitHub\system_nomad_rfid\Mcdonalds\Mcdonalds\obj\Debug\Mcdonalds.csprojResolveAssemblyReference.cache
+C:\Users\Etienne\Documents\GitHub\system_nomad_rfid\Mcdonalds\Mcdonalds\obj\Debug\Mcdonalds.Form1.resources
+C:\Users\Etienne\Documents\GitHub\system_nomad_rfid\Mcdonalds\Mcdonalds\obj\Debug\Mcdonalds.Properties.Resources.resources
+C:\Users\Etienne\Documents\GitHub\system_nomad_rfid\Mcdonalds\Mcdonalds\obj\Debug\Mcdonalds.csproj.GenerateResource.Cache
+C:\Users\Etienne\Documents\GitHub\system_nomad_rfid\Mcdonalds\Mcdonalds\obj\Debug\Mcdonalds.csproj.CoreCompileInputs.cache
+C:\Users\Etienne\Documents\GitHub\system_nomad_rfid\Mcdonalds\Mcdonalds\obj\Debug\Mcdonalds.exe
+C:\Users\Etienne\Documents\GitHub\system_nomad_rfid\Mcdonalds\Mcdonalds\obj\Debug\Mcdonalds.pdb

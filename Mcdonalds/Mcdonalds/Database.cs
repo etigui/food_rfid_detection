@@ -32,10 +32,26 @@ namespace Mcdonalds {
 
         }
 
+        public List<string> get_all_items_name() {
+            List<string> names = new List<string>();
+
+            // Open database (or create if doesn't exist)
+            using (var db = new LiteDatabase(connection_string)) {
+
+                // Get a collection (or create, if doesn't exist)
+                var products = db.GetCollection<TProduct>("products");
+
+                // Get all names
+                var query = products.Find(Query.All());
+                foreach (var data in query) {
+                    names.Add(data.Name);
+                }
+            }
+            return names;
+        }
+
         public string get_product_by_tag_id(string tag_id) {
-
             string name = string.Empty;
-
 
             // Open database (or create if doesn't exist)
             using (var db = new LiteDatabase(connection_string)) {

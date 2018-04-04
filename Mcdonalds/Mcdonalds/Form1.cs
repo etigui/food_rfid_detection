@@ -20,7 +20,7 @@ namespace Mcdonalds {
         List<Item<string, int>> items = new List<Item<string, int>>();
         private int last_index_selected = -1;
         private string last_name_selected = string.Empty;
-        private static string com_port = "COM12";
+        private static string com_port = "COM4";
         Database db = null;
         #endregion
 
@@ -33,41 +33,25 @@ namespace Mcdonalds {
             //db.add_product("75-4-92-116", "Salads", 50);
             //db.add_product("232-151-241-55", "Nuggets", 100);
             db.get_all_product();
-
-
-
-            // foreach (Control ctl in this.GetAllCtls(typeof(Button))) {
-            //MessageBox.Show("Found a button on the form called '" + ctl.Text + "'");
-
-            //var c = getControls("MetroFramework.Controls.MetroButton", this);
-
-            int i = 0;
-            var t = this.GetType();
-            var controls = t.GetProperties();
-            //MessageBox.Show(controls.Count);
-            foreach (PropertyInfo fi in controls) {
-                
-                i++;
-            }
-
-
-
-                // var c = GetAll(this, typeof(MetroFramework.Controls.MetroButton));
-                // MessageBox.Show("Total Controls: " + c.Count());
-            }
-
-        public List<Control> getControls(string what, Control where) {
-            List<Control> controles = new List<Control>();
-            foreach (Control c in where.Controls) {
-                if (c.GetType().Name == what) {
-                    controles.Add(c);
-                } else if (c.Controls.Count > 0) {
-                    controles.AddRange(getControls(what, c));
-                }
-            }
-            return controles;
+            Item_button_enable();
         }
 
+
+        private void Item_button_enable() {
+            List<string> names = db.get_all_items_name();
+            List<string> ctrl = new List<string> { "-", "+", "Validate", "Remove" };
+            foreach (Control cont in this.Controls) {
+                if (cont.HasChildren) {
+                    foreach (Control contChild in cont.Controls) {
+                        if (contChild.GetType() == typeof(MetroFramework.Controls.MetroButton)) {
+                            if (!names.Contains(contChild.Text) && !ctrl.Contains(contChild.Text)) {
+                                contChild.Enabled = false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
 
         #region Button items (add)
@@ -252,17 +236,35 @@ namespace Mcdonalds {
 
                 rfid.Tag_detected += Tag_detected;
 
-                if (rfid.Open_read()) {
-
-                }
+                bool d = rfid.Open_read();
+                int i = 0;
             }
         }
 
         private void Tag_detected(object sender, TagDetectedEventArgs e) {
-            Console.WriteLine($"Tag ID: {e.Tag_id}, Name: {db.get_product_by_tag_id(e.Tag_id)}");
-            
-            foreach(string d in LB_items.Items) {
+            string name = db.get_product_by_tag_id(e.Tag_id);
+            Console.WriteLine($"Tag ID: {e.Tag_id}, Name: {name}");
 
+            int index = 0;
+            int quantity = 0;
+            bool parse = false;
+            
+            // Iter all items in the listbox
+            foreach (string d in LB_items.Items) {  
+                if (d.Split(' ')[1] == name) {
+                    parse = int.TryParse(d.Split(' ')[0].Replace("[", "").Replace("]", "").Replace("x", ""), out quantity);
+                    break;
+                }
+                index++;
+            }
+
+            // Check if the int was well parsed and if we find the item name
+            if (parse) {
+
+                // Invoke Listbox cause ither thread
+                LB_items.Invoke((Action)delegate {
+                    LB_items.Items[index] = $"[{quantity -1 }x] {name}";
+                });
             }
         }
 
