@@ -1,0 +1,7 @@
+C:\Users\Admin\source\repos\Rfid\Rfid\bin\Debug\Rfid.exe.config
+C:\Users\Admin\source\repos\Rfid\Rfid\bin\Debug\Rfid.exe
+C:\Users\Admin\source\repos\Rfid\Rfid\bin\Debug\Rfid.pdb
+C:\Users\Admin\source\repos\Rfid\Rfid\obj\Debug\Rfid.csprojResolveAssemblyReference.cache
+C:\Users\Admin\source\repos\Rfid\Rfid\obj\Debug\Rfid.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\Rfid\Rfid\obj\Debug\Rfid.exe
+C:\Users\Admin\source\repos\Rfid\Rfid\obj\Debug\Rfid.pdb
