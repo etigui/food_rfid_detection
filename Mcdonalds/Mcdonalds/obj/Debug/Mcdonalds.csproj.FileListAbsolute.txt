@@ -1,0 +1,14 @@
+C:\Users\Admin\source\repos\Mcdonalds\Mcdonalds\bin\Debug\Mcdonalds.exe.config
+C:\Users\Admin\source\repos\Mcdonalds\Mcdonalds\bin\Debug\Mcdonalds.exe
+C:\Users\Admin\source\repos\Mcdonalds\Mcdonalds\bin\Debug\Mcdonalds.pdb
+C:\Users\Admin\source\repos\Mcdonalds\Mcdonalds\bin\Debug\MetroFramework.Design.dll
+C:\Users\Admin\source\repos\Mcdonalds\Mcdonalds\bin\Debug\MetroFramework.dll
+C:\Users\Admin\source\repos\Mcdonalds\Mcdonalds\bin\Debug\MetroFramework.Fonts.dll
+C:\Users\Admin\source\repos\Mcdonalds\Mcdonalds\obj\Debug\Mcdonalds.Form1.resources
+C:\Users\Admin\source\repos\Mcdonalds\Mcdonalds\obj\Debug\Mcdonalds.Properties.Resources.resources
+C:\Users\Admin\source\repos\Mcdonalds\Mcdonalds\obj\Debug\Mcdonalds.csproj.GenerateResource.cache
+C:\Users\Admin\source\repos\Mcdonalds\Mcdonalds\obj\Debug\Mcdonalds.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\Mcdonalds\Mcdonalds\obj\Debug\Mcdonalds.csproj.CopyComplete
+C:\Users\Admin\source\repos\Mcdonalds\Mcdonalds\obj\Debug\Mcdonalds.exe
+C:\Users\Admin\source\repos\Mcdonalds\Mcdonalds\obj\Debug\Mcdonalds.pdb
+C:\Users\Admin\source\repos\Mcdonalds\Mcdonalds\obj\Debug\Mcdonalds.csprojResolveAssemblyReference.cache
