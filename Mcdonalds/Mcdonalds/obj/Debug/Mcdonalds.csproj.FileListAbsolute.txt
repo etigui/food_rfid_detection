@@ -24,3 +24,4 @@ C:\Users\Etienne\Documents\GitHub\system_nomad_rfid\Mcdonalds\Mcdonalds\obj\Debu
 C:\Users\Etienne\Documents\GitHub\system_nomad_rfid\Mcdonalds\Mcdonalds\obj\Debug\Mcdonalds.csproj.CoreCompileInputs.cache
 C:\Users\Etienne\Documents\GitHub\system_nomad_rfid\Mcdonalds\Mcdonalds\obj\Debug\Mcdonalds.exe
 C:\Users\Etienne\Documents\GitHub\system_nomad_rfid\Mcdonalds\Mcdonalds\obj\Debug\Mcdonalds.pdb
+C:\Users\Etienne\Documents\GitHub\system_nomad_rfid\Mcdonalds\Mcdonalds\obj\Debug\Mcdonalds.csprojResolveAssemblyReference.cache
