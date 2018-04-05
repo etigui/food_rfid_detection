@@ -227,6 +227,14 @@ namespace Mcdonalds {
             foreach (string d in LB_items.Items) {
                 if (d.Split(' ')[1] == name) {
                     parse = int.TryParse(d.Split(' ')[0].Replace("[", "").Replace("]", "").Replace("x", ""), out quantity);
+
+                    // Before it was the quantity 0 to say that we were fine => now ✔
+                    if (!parse) {
+                        if (d.Split(' ')[0].Contains("✔")) {
+                            parse = true;
+                            quantity = 0;
+                        }
+                    }
                     break;
                 }
                 index++;
@@ -246,11 +254,28 @@ namespace Mcdonalds {
 
                     // Invoke Listbox cause ither thread
                     LB_items.Invoke((Action)delegate {
-                        LB_items.Items[index] = $"[{quantity - 1 }x] {name}";
+
+                        if (quantity == 1) {
+                            LB_items.Items[index] = $"[✔] {name}";
+                        } else {
+                            LB_items.Items[index] = $"[{quantity - 1 }x] {name}";
+                        }
+
                     });
                 } else {
-                    MessageBox.Show("You add an extra item !", "Item error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("You add an extra item. Manager key is needed !", "Item error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+
+            // Check if extra item with not same name is there
+            bool check = false;
+            foreach (string d in LB_items.Items) {
+                if (d.Split(' ')[1] == name) {
+                    check = true;
+                }
+            }
+            if (!check) {
+                MessageBox.Show("You add an extra item. Manager key is needed !", "Item error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
