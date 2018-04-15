@@ -31,6 +31,7 @@ namespace Mcdonalds {
         private void Form1_Load(object sender, EventArgs e) {
             this.Width = Screen.PrimaryScreen.WorkingArea.Width;
             this.Height = Screen.PrimaryScreen.WorkingArea.Height;
+            this.ActiveControl = LB_items;
             db = new Database();
             db.get_all_product();
             Item_button_enable();
@@ -302,19 +303,20 @@ namespace Mcdonalds {
             // Check if there is something to checkout
             if (LB_items.Items.Count != 0) {
                 if (BT_validate.Text == "Validate") {
-                    BT_validate.Text = "New client";
-
-                    // Red color => not all validated
-                    LB_items.BackColor = Color.Red;
-                    LB_items.ForeColor = Color.White;
-                    Pannel_update(false);
 
                     // Start detect tag id
                     rfid = new Rfid(com_port);
                     rfid.Tag_detected += Tag_detected;
                     if (!rfid.Open_read()) {
-                        throw new ArgumentException("RFID fatal error");
+                        MessageBox.Show("RFID module is missing", "RFID module error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Application.Exit();
                     }
+                    
+                    // Red color => not all validated
+                    LB_items.BackColor = Color.Red;
+                    LB_items.ForeColor = Color.White;
+                    BT_validate.Text = "New client";
+                    Pannel_update(false);
                 } else {
 
                     // Check if server want to start a new client
@@ -339,10 +341,10 @@ namespace Mcdonalds {
             List<string> ctrl = new List<string> { "-", "+", "Validate", "Remove", "New client" };
             foreach (Control cont in this.Controls) {
                 if (cont.HasChildren) {
-                    foreach (Control contChild in cont.Controls) {
-                        if (contChild.GetType() == typeof(MetroFramework.Controls.MetroButton)) {
-                            if (!names.Contains(contChild.Text) && !ctrl.Contains(contChild.Text)) {
-                                contChild.Enabled = false;
+                    foreach (Control cont_child in cont.Controls) {
+                        if (cont_child.GetType() == typeof(MetroFramework.Controls.MetroButton)) {
+                            if (!names.Contains(cont_child.Text) && !ctrl.Contains(cont_child.Text)) {
+                                cont_child.Enabled = false;
                             }
                         }
                     }
