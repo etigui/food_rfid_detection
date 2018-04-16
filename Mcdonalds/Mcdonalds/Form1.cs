@@ -33,8 +33,13 @@ namespace Mcdonalds {
             this.Height = Screen.PrimaryScreen.WorkingArea.Height;
             this.ActiveControl = LB_items;
             db = new Database();
-            db.get_all_product();
+            //db.Remove_items();
+            //db.add_product("75-4-92-116", "PokeBowlSaumon", 100);
+            //db.add_product("13-92-44-59", "Salad", 50);
+            //db.add_product("232-151-241-55", "BananaBread", 30);
             Item_button_enable();
+            db.get_all_product();
+
         }
         #endregion
 

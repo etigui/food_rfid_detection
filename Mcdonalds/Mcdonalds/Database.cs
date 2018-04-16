@@ -90,6 +90,26 @@ namespace Mcdonalds {
             }
         }
         #endregion
+
+        #region Remove datas
+
+        public void Remove_items() {
+
+            // Open database (or create if doesn't exist)
+            using (var db = new LiteDatabase(connection_string)) {
+
+                // Get a collection (or create, if doesn't exist)
+                var products = db.GetCollection<TProduct>("products");
+
+                // Get all data
+                var query = products.Find(Query.All());
+
+                foreach (var data in query) {
+                    products.Delete(data.Id);
+                }
+            }
+        }
+        #endregion
     }
     #region Table class
 
