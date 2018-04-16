@@ -65,51 +65,51 @@ namespace Mcdonalds {
         }
 
         private void BT_bigmac_Click(object sender, EventArgs e) {
-            Add_item("BigMac");
+            Add_item(((Button)sender).Text);
         }
 
         private void BT_wraps_Click(object sender, EventArgs e) {
-            Add_item("Wraps");
+            Add_item(((Button)sender).Text);
         }
 
         private void BT_cola_Click(object sender, EventArgs e) {
-            Add_item("CocaCola");
+            Add_item(((Button)sender).Text);
         }
 
         private void BT_cheeseburger_Click(object sender, EventArgs e) {
-            Add_item("Cheeseburger");
+            Add_item(((Button)sender).Text);
         }
 
         private void BT_salad_Click(object sender, EventArgs e) {
-            Add_item("Salads");
+            Add_item(((Button)sender).Text);
         }
 
         private void BT_sprite_Click(object sender, EventArgs e) {
-            Add_item("Sprite");
+            Add_item(((Button)sender).Text);
         }
 
         private void BT_bigtasty_Click(object sender, EventArgs e) {
-            Add_item("BigTasty");
+            Add_item(BT_bigtasty.Text);
         }
 
         private void BT_nuggets_Click(object sender, EventArgs e) {
-            Add_item("Nuggets");
+            Add_item(BT_nuggets.Text);
         }
 
         private void BT_fanta_Click(object sender, EventArgs e) {
-            Add_item("Fanta");
+            Add_item(BT_fanta.Text);
         }
 
         private void BT_mcfish_Click(object sender, EventArgs e) {
-            Add_item("McFish");
+            Add_item(((Button)sender).Text);
         }
 
         private void BT_fries_Click(object sender, EventArgs e) {
-            Add_item("Fries");
+            Add_item(((Button)sender).Text);
         }
 
         private void BT_water_Click(object sender, EventArgs e) {
-            Add_item("Water");
+            Add_item(((Button)sender).Text);
         }
         #endregion
 
