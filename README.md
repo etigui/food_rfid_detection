@@ -10,13 +10,14 @@ Scan et vérification des articles disposé sur un plateau.
 
 ## Réalisation
 
-![Réalisation](/images/realisation.png)
-
-
 Lecteur RFID:
 - Initialisation du lecteur : 0x02
 - Lecture du tag : 4bytes via UART
 - Conversion de l’ID sous la forme : x(xx)-x(xx)-x(xx)-x(xx)
 - Comparaison avec la base de donnée
+
+![Réalisation](/images/realisation.png)
+
+
 
 
